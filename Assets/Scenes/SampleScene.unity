@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 1859028755}
   - component: {fileID: 1859028754}
   - component: {fileID: 1859028753}
+  - component: {fileID: 1859028756}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -236,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ee81ce4975ba34b8d9f513f984e086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 5
-  verticalSpeed: 5
+  horizontalSpeed: 10
+  verticalSpeed: 10
 --- !u!212 &1859028754
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -303,3 +304,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1859028756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859028752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff120af1e0a262d4d810ec126ccdf51f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -20,11 +20,16 @@ namespace Gravity2DTest
 
         void Movement()
         {
-            float xS = Input.GetAxis(MovementControls.GetHorizontalAxisName());
-            float vS = Input.GetAxis(MovementControls.GetVerticalAxisName());
+            float xS = Input.GetAxis(AxisNames.GetHorizontalAxisName());
+            float vS = Input.GetAxis(AxisNames.GetVerticalAxisName());
 
 
             transform.position += new Vector3(xS * horizontalSpeed, vS * verticalSpeed) * Time.deltaTime;
+        }
+
+        void HorizontalMove()
+        {
+
         }
     }
 }

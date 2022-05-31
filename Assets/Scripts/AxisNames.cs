@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Gravity2DTest
 {
-    public class MovementControls : MonoBehaviour
+    public class AxisNames : MonoBehaviour
     {
         static string horizontalAxisName = "HorizontalAxis";
         static string verticalAxisName = "VerticalAxis";
