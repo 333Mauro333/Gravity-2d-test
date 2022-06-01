@@ -18,6 +18,9 @@ namespace Gravity2DTest
         void Update()
         {
             SetBorderLimits();
+
+            //Debug.Log(Camera.main.WorldToViewportPoint(transform.position));
+            Debug.Log(Camera.main.WorldToViewportPoint(sR.bounds.max));
         }
 
 
@@ -27,23 +30,26 @@ namespace Gravity2DTest
             CheckBotLimit();
             CheckLeftLimit();
             CheckRightLimit();
+
+            Debug.Log("Tamaño de la camara en pixeles: " + Camera.main.pixelRect.size);
+            Debug.Log("Tamaño de la camara en viewport: " + Camera.main.ScreenToViewportPoint(Camera.main.pixelRect.size));
         }
 
         bool ExceededTopLimit()
         {
-            return Camera.main.WorldToScreenPoint(sR.bounds.max).y > Camera.main.pixelHeight;
+            return Camera.main.WorldToViewportPoint(sR.bounds.max).y > 1.0f;
         }
         bool ExceededBotLimit()
         {
-            return Camera.main.WorldToScreenPoint(sR.bounds.min).y < 0;
+            return Camera.main.WorldToViewportPoint(sR.bounds.min).y < 0.0f;
         }
         bool ExceededLeftLimit()
         {
-            return Camera.main.WorldToScreenPoint(sR.bounds.min).x < 0;
+            return Camera.main.WorldToViewportPoint(sR.bounds.min).x < 0.0f;
         }
         bool ExceededRightLimit()
         {
-            return Camera.main.WorldToScreenPoint(sR.bounds.max).x > Camera.main.pixelWidth;
+            return Camera.main.WorldToViewportPoint(sR.bounds.max).x > 1.0f;
         }
 
 
@@ -53,31 +59,40 @@ namespace Gravity2DTest
         {
             if (ExceededTopLimit())
             {
-                Debug.Log("Se me fue para arriba.");
-                //float topCamera = Camera.main.pixelHeight;
+                float topCamera = Camera.main.ScreenToWorldPoint(Camera.main.pixelRect.size).y;
+                float spriteHeight = sR.bounds.size.y;
 
-                //transform.position = new Vector3(transform.position.x, Camera.main.WorldToScreenPoint(sR.bounds.max).y - Camera.main.WorldToScreenPoint(sR.sprite.bounds.size).y / 2.0f);
+                transform.position = new Vector3(transform.position.x, topCamera - spriteHeight / 2.0f, transform.position.z);
             }
         }
         void CheckBotLimit()
         {
             if (ExceededBotLimit())
             {
-                Debug.Log("Se pasó para abajo.");
+                float botCamera = -Camera.main.ScreenToWorldPoint(Camera.main.pixelRect.size).y;
+                float spriteHeight = sR.bounds.size.y;
+
+                transform.position = new Vector3(transform.position.x, botCamera + spriteHeight / 2.0f, transform.position.z);
             }
         }
         void CheckLeftLimit()
         {
             if (ExceededLeftLimit())
             {
-                Debug.Log("Se fue para la izquierda.");
+                float leftCamera = -Camera.main.ScreenToWorldPoint(Camera.main.pixelRect.size).x;
+                float spriteWidth = sR.bounds.size.x;
+
+                transform.position = new Vector3(leftCamera + spriteWidth / 2.0f, transform.position.y, transform.position.z);
             }
         }
         void CheckRightLimit()
         {
             if (ExceededRightLimit())
             {
-                Debug.Log("Se exhedió para la derecha.");
+                float rightCamera = Camera.main.ScreenToWorldPoint(Camera.main.pixelRect.size).x;
+                float spriteWidth = sR.bounds.size.x;
+
+                transform.position = new Vector3(rightCamera - spriteWidth / 2.0f, transform.position.y, transform.position.z);
             }
         }
 
